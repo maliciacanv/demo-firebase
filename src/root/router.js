@@ -21,7 +21,7 @@ const viewTmp = (routers) => {
  
   switch (router) {
   case 'home':
-   
+
     main.appendChild(signUpForm());
     break;
   
