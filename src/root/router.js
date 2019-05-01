@@ -1,5 +1,5 @@
 // import { } from '../auth/ui-auth.js';
-import { signIn, register } from '../auth/ui-auth.js';
+import { signIn, register, showUserData } from '../auth/ui-auth.js';
 import { signUpForm } from '../data/ui-data.js';
 
 const changeTmp = (hash) => {
@@ -16,6 +16,7 @@ const viewTmp = (routers) => {
   const router = routers.substr(2, routers.length - 2);
 
   const main = document.getElementById('container-demo');
+  const root = document.getElementById('root');
   main.innerHTML = '';
  
   switch (router) {
@@ -30,6 +31,7 @@ const viewTmp = (routers) => {
 
   case 'signin':
     main.appendChild(signIn());
+    root.appendChild(showUserData());
     break;  
 
   default:

@@ -1,4 +1,5 @@
 import { initRouterDemo } from './root/router.js';
+import { initFirebaseAuth } from './auth/view-auth.js';
 
 const init = () => {
   const config = {
@@ -13,6 +14,7 @@ const init = () => {
   firebase.initializeApp(config);
 
   initRouterDemo();
+  initFirebaseAuth();
 };
 
 window.onload = init;

@@ -1,4 +1,5 @@
-// import {  } from './auth.js';
+ import { gmailLogin } from './auth.js';
+ import { userState } from './view-auth.js';
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -33,6 +34,9 @@ export const signIn = () => {
   const btnGoogle = sectionElement.querySelector('#gmail-login');
   btnGoogle.addEventListener('click', () => {
     // LLamar a la funcion para iniciar sesion con google
+    gmailLogin();
+
+
   });
 
   const btnRegister = sectionElement.querySelector('#signup-question');
@@ -61,4 +65,14 @@ export const register = () => {
     // Llamar a la funcion para registrar una cuenta
   });
   return secElement;
+};
+
+export const showUserData = () => {
+  const userSection = document.createElement('section');
+  userSection.innerHTML = `
+    <div>
+      <div>${userState().displayName}</div>
+    </div>
+  `;
+  return userSection;
 };
