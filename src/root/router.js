@@ -1,7 +1,10 @@
-// import { } from '../auth/ui-auth.js';
+//import { } from '../auth/ui-auth.js';
+import { mostrarData } from '../data/ui-data.js';
+import { traerDatosDeFirestore } from '../data/data.js'
 import { signIn, register, showUserData } from '../auth/ui-auth.js';
-import { signUpForm } from '../data/ui-data.js';
 
+
+// cambiar el hash -->
 const changeTmp = (hash) => {
   if (hash === '#/' || hash === '' || hash === '#') {
     return viewTmp('#/signin');
@@ -21,8 +24,15 @@ const viewTmp = (routers) => {
  
   switch (router) {
   case 'home':
+  traerDatosDeFirestore(data => {
+    console.log(data)
+    main.innerHTML = '';
+    main.appendChild(mostrarData(data));
+  }) 
 
-    main.appendChild(signUpForm());
+
+    // main.appendChild(signUpForm());
+
     break;
   
   case 'register':
