@@ -7,15 +7,15 @@ const changeHash = (hash) => {
 
 export const signIn = () => {
   const signInTemplate = `
-    <div>
+    <div class="offset-5 mt-5">
         <form>
-        <h2>Iniciar Sesión</h2>
-        <input type="email" placeholder="Correo" id="email-si">
-        <input type="password" placeholder="Contraseña" id="password-si">
-        <button type="button" id="signin-btn">INICIAR SESIÓN</button>
+        <h2 class="ml-4 mb-4">Iniciar Sesión</h2>
+        <p><input type="email" placeholder="Correo" id="email-si" class="texto"></p>
+        <input type="password" placeholder="Contraseña"  class="texto"id="password-si">
+        <p><button type="button" id="signin-btn" class="mt-3 btn btn-outline-info ml-5">INICIAR SESIÓN</button></p>
         </form>
-        <button id="facebook-login" class="fa fa-facebook"></button>
-        <button id="gmail-login" class="fa fa-google"></button>
+        <button id="facebook-login" class="fa fa-facebook loginBtn--facebook loginBtn mb-4"></button>
+        <button id="gmail-login" class="fa fa-google loginBtn loginBtn--google "></button>
         <h3 id="signup-question">¿No tienes una cuenta?</h3>
     </div>`;
   const sectionElement = document.createElement('section');
