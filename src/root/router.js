@@ -1,7 +1,7 @@
 //import { } from '../auth/ui-auth.js';
 import { mostrarData } from '../data/ui-data.js';
 import { traerDatosDeFirestore } from '../data/data.js'
-import { signIn, register, showUserData } from '../auth/ui-auth.js';
+import { signIn, register } from '../auth/ui-auth.js';
 
 
 // cambiar el hash -->
@@ -19,7 +19,7 @@ const viewTmp = (routers) => {
   const router = routers.substr(2, routers.length - 2);
 
   const main = document.getElementById('container-demo');
-  const root = document.getElementById('root');
+  // const root = document.getElementById('root');
   main.innerHTML = '';
  
   switch (router) {
@@ -30,9 +30,6 @@ const viewTmp = (routers) => {
     main.appendChild(mostrarData(data));
   }) 
 
-
-    // main.appendChild(signUpForm());
-
     break;
   
   case 'register':
@@ -41,7 +38,7 @@ const viewTmp = (routers) => {
 
   case 'signin':
     main.appendChild(signIn());
-    root.appendChild(showUserData());
+    // root.appendChild(showUserData());
     break;  
 
   default:

@@ -16,10 +16,9 @@ export const mostrarData = (cards) => {
         </form>
       </div>
     </div>
-<div class="container margin-top">
-    <div id= "container-cards-image" class="row"></div>
-</div>
-    `;
+  <div class="container margin-top">
+      <div id= "container-cards-image" class="row"></div>
+  </div>`;
     
     formElem.innerHTML = tempFormSignUp;
    
@@ -70,9 +69,7 @@ const cardsImage = (data) => {
             <img class="img-fluid img-thumbnail" src="${data.url}" alt="">
       
       <h3 class="text-cards">Nombre de la imagen</h3>
-            </a>
-  
-   
+      </a>
 
   `;
   formE.innerHTML = tempForm;
