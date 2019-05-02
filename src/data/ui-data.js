@@ -1,11 +1,15 @@
 import { subirImagenStorage, subirImageUrlFirestore } from './data.js';
-
+import {logOut} from '../auth/auth.js';
+import {userState} from '../auth/view-auth.js';
 
 export const mostrarData = (cards) => {
     const formElem = document.createElement('div');
     const tempFormSignUp = `
     <header class="header">
-    <div class="text-user"><h2>nombre de usuario</h2></div></header>
+    <div class="text-user"><h2>${userState().displayName}</h2></div>
+    <img src=${userState().photoURL} alt="foto-usuario">
+    <button type="button" id="btn-logout"><i class="fa fa-close"></i></button>
+    </header>
     <div class = "margin-top d-flex justify-content-center">
         <div>
         <form id="form-images" >
@@ -24,7 +28,8 @@ export const mostrarData = (cards) => {
    
     const archivoImagen = formElem.querySelector('#archivo-imagen');
     const containerCardsImage = formElem.querySelector('#container-cards-image');
-
+    const btnLogOut = formElem.querySelector('#btn-logout');
+    btnLogOut.addEventListener('click',logOut);
     archivoImagen.addEventListener('change', () => {
       const cargarImagenFirestore = archivoImagen.files[0];
 // console.log(cargarImagenFirestore)
@@ -65,10 +70,7 @@ const cardsImage = (data) => {
   const tempForm = `
   
      <a href="#/home" class="d-block mb-4 h-100">
-     <h3 class="text-cards">Nombre del usuario</h3>
             <img class="img-fluid img-thumbnail" src="${data.url}" alt="">
-      
-      <h3 class="text-cards">Nombre de la imagen</h3>
       </a>
 
   `;

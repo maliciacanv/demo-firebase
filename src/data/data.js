@@ -1,3 +1,4 @@
+// import { storage } from '../main.js';
 // Subir imagenes a Storage
 
 export const subirImagenStorage = () => firebase.storage().ref();

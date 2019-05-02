@@ -1,4 +1,4 @@
- import { gmailLogin } from './auth.js';
+ import { gmailLogin,facebookLogin } from './auth.js';
  import { userState } from './view-auth.js';
 
 const changeHash = (hash) => {
@@ -29,6 +29,8 @@ export const signIn = () => {
   const btnFacebook = sectionElement.querySelector('#facebook-login');
   btnFacebook.addEventListener('click', () => {
     // Llamar a la funcion para inciar sesion con facebook
+    facebookLogin();
+    changeHash('/signin');
   });
 
   const btnGoogle = sectionElement.querySelector('#gmail-login');
@@ -67,12 +69,3 @@ export const register = () => {
   return secElement;
 };
 
-export const showUserData = () => {
-  const userSection = document.createElement('section');
-  userSection.innerHTML = `
-    <div>
-      <div>${userState().displayName}</div>
-    </div>
-  `;
-  return userSection;
-};

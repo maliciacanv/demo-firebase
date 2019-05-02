@@ -1,6 +1,9 @@
 import { initRouterDemo } from './root/router.js';
 import { initFirebaseAuth } from './auth/view-auth.js';
 
+
+//export const storage = () => firebase.storage();
+
 const init = () => {
   const config = {
     apiKey: "AIzaSyCXp9b4bxUDX6ulbYYSitQ8MyhoKXvtSVw",

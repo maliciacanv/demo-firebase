@@ -1,11 +1,16 @@
+import {logOut} from './auth.js';
+const changeHash = (hash) => {
+  location.hash = hash;
+};
+
 export const userState = () => firebase.auth().currentUser;
 
 export const authStateObserver = (user) => {
   if (user) { 
-    // changeHash('/inicio');
+     changeHash('/home');
+    
   } else {
-    // logOut();
-    // changeHash('/home');
+     changeHash('/signin');
   }
 };
 
