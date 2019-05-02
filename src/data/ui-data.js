@@ -21,7 +21,7 @@ export const mostrarData = (cards) => {
         <form id="form-images" >
           <label class="btn btn-file">
           <input type="file" name="fichero" value="" id="archivo-imagen" class="d-none"/>
-          <img src="/src/img/icon-upload.png"  alt="descargar">
+          <img src="/src/public/icon-upload.png"  alt="descargar">
           </label>
         </form>
       </div>
