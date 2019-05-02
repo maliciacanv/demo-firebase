@@ -1,5 +1,5 @@
  import { gmailLogin,facebookLogin } from './auth.js';
- import { userState } from './view-auth.js';
+ // import { userState } from './view-auth.js';
 
 const changeHash = (hash) => {
   location.hash = hash;
@@ -30,15 +30,12 @@ export const signIn = () => {
   btnFacebook.addEventListener('click', () => {
     // Llamar a la funcion para inciar sesion con facebook
     facebookLogin();
-    changeHash('/signin');
   });
 
   const btnGoogle = sectionElement.querySelector('#gmail-login');
   btnGoogle.addEventListener('click', () => {
     // LLamar a la funcion para iniciar sesion con google
     gmailLogin();
-
-
   });
 
   const btnRegister = sectionElement.querySelector('#signup-question');

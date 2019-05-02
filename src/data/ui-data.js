@@ -1,20 +1,26 @@
 import { subirImagenStorage, subirImageUrlFirestore } from './data.js';
-import {logOut} from '../auth/auth.js';
-import {userState} from '../auth/view-auth.js';
+import { logOut } from '../auth/auth.js';
+import { userState } from '../auth/view-auth.js';
 
 export const mostrarData = (cards) => {
-    const formElem = document.createElement('div');
-    const tempFormSignUp = `
+  const formElem = document.createElement('div');
+  const tempFormSignUp = `
     <header class="header">
-    <div class="text-user"><h2>${userState().displayName}</h2></div>
-    <img src=${userState().photoURL} alt="foto-usuario">
-    <button type="button" id="btn-logout"><i class="fa fa-close"></i></button>
+    <div>
+      <div>
+        <button type="button" id="btn-logout" class="btn-logout"><i class="fa fa-close"></i></button>
+      </div>
+      <div class="d-flex justify-content-end">
+        <img src=${userState().photoURL} class="img-size mr-3 mt-3 " alt="foto-usuario">
+        <h2 class="mt-4 mr-4" >${userState().displayName}</h2>
+      </div>
+   </div>
     </header>
     <div class = "margin-top d-flex justify-content-center">
         <div>
         <form id="form-images" >
           <label class="btn btn-file">
-          <input type="file" name="fichero" value="" id="archivo-imagen" class="d-none d-lg-block"/>
+          <input type="file" name="fichero" value="" id="archivo-imagen" class="d-none"/>
           <img src="/src/img/icon-upload.png"  alt="descargar">
           </label>
         </form>
@@ -23,50 +29,55 @@ export const mostrarData = (cards) => {
   <div class="container margin-top">
       <div id= "container-cards-image" class="row"></div>
   </div>`;
-    
-    formElem.innerHTML = tempFormSignUp;
-   
-    const archivoImagen = formElem.querySelector('#archivo-imagen');
-    const containerCardsImage = formElem.querySelector('#container-cards-image');
-    const btnLogOut = formElem.querySelector('#btn-logout');
-    btnLogOut.addEventListener('click',logOut);
-    archivoImagen.addEventListener('change', () => {
-      const cargarImagenFirestore = archivoImagen.files[0];
-// console.log(cargarImagenFirestore)
-      
-      
-const uploadTask = subirImagenStorage().child('imagenes-memes/' + cargarImagenFirestore.name ).put(cargarImagenFirestore);
 
-      uploadTask.on('state_changed', 
-        function(snapshot){
-// se va mostrando el progreso de la imagen
-        }, function(error) {
+  formElem.innerHTML = tempFormSignUp;
+
+  const archivoImagen = formElem.querySelector('#archivo-imagen');
+  const containerCardsImage = formElem.querySelector('#container-cards-image');
+  const btnLogOut = formElem.querySelector('#btn-logout');
+ 
+  btnLogOut.addEventListener('click', logOut);
+  archivoImagen.addEventListener('change', () => {
+
+    const cargarImagenFirestore = archivoImagen.files[0];
+    const uploadTask = subirImagenStorage().child('imagenes-memes/' + cargarImagenFirestore.name).put(cargarImagenFirestore);
+
+    // como se prepara ala data para firestore
+
+    uploadTask.on('state_changed',
+      function (snapshot) {
+        // se va mostrando el progreso de la imagen
+      }, function (error) {
         alert('Hubo un error')
-      }, function() {
-          uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-          
+      }, function () {
+        // captura la url de la imagen en downloadURL
+        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+         
+          const objCollection = {
+            nombre: cargarImagenFirestore.name,
+            url: downloadURL
+          };
 
-            const objCollection = {
-              nombre: cargarImagenFirestore.name ,
-              url:downloadURL
-            };
-      
-            subirImageUrlFirestore(objCollection);
-            alert('Se subio la imagen con ' +  downloadURL);
+        // Agrega objeto a firestore.
+          subirImageUrlFirestore(objCollection);
+         
+          alert('Se subio la imagen con ' + downloadURL);
         });
       });
-    });
-    cards.forEach( ele => {
-      containerCardsImage.appendChild(cardsImage(ele))
-    })
-    return formElem;
-  };
-  
-  
-  
+  });
+  // recorre  las imagenes para mostrarse en el navegador.
+  cards.forEach(ele => {
+    containerCardsImage.appendChild(cardsImage(ele))
+  })
+  return formElem;
+};
+
+
+// template de imagenes mostradas
+
 const cardsImage = (data) => {
   const formE = document.createElement('div');
-  formE.setAttribute('class','col-lg-3 col-md-4 col-6');
+  formE.setAttribute('class', 'col-lg-3 col-md-4 col-6');
   const tempForm = `
   
      <a href="#/home" class="d-block mb-4 h-100">
